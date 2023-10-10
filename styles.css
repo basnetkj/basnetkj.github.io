@@ -1,0 +1,28 @@
+/* Styles  headings */
+h1, h2 {
+    color: white;
+}
+
+/* Styles paragraphs */
+p,ul {
+    color: yellow;
+}
+
+/* Background styles */
+body {
+    background: linear-gradient(to bottom, #C3FFC0, #73E185);
+}
+
+section {
+    background: linear-gradient(to bottom, #A7E8A2, #48BB78);
+}
+
+footer {
+    background: linear-gradient(to bottom, #88D28B, #34994A);
+}
+
+/* eliminate border */
+body, section, footer {
+    margin: 0;
+    padding: 0;
+}
