@@ -1,28 +1,39 @@
 /* Styles  headings */
-h1, h2 {
-    color: white;
+h1 {
+    color:beige;
+    margin-bottom: 1px;
+    text-indent: 3%;
 }
-
+#address {
+    color:beige;
+    margin-top: 1px;
+    text-indent: 3%;
+}
+h2 {
+    color:beige;
+    text-indent: 3%;
+    margin-top: 6%;
+    
+}
 /* Styles paragraphs */
-p,ul {
-    color: yellow;
+p{
+    color:bisque;
+    text-indent: 3%;
+}
+#link{
+    color:bisque;
+    text-indent: 3%;
+    font-size:20px;
+    margin-top: 5%;
 }
 
 /* Background styles */
 body {
-    background: linear-gradient(to bottom, #C3FFC0, #73E185);
-}
-
-section {
-    background: linear-gradient(to bottom, #A7E8A2, #48BB78);
-}
-
-footer {
-    background: linear-gradient(to bottom, #88D28B, #34994A);
+    background: linear-gradient(to right,#299793, #a4f4f1);
 }
 
 /* eliminate border */
-body, section, footer {
+body {
     margin: 0;
     padding: 0;
 }
