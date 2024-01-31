@@ -1,5 +1,4 @@
-/*
-Styles  headings
+/* Styles  headings */
 h1 {
     color:beige;
     margin-bottom: 1px;
@@ -16,7 +15,7 @@ h2 {
     margin-top: 6%;
     
 }
-Styles paragraphs
+/* Styles paragraphs */
 p{
     color:bisque;
     text-indent: 3%;
@@ -28,59 +27,13 @@ p{
     margin-top: 5%;
 }
 
-Background styles
+/* Background styles */
 body {
     background: linear-gradient(to right,#299793, #a4f4f1);
 }
 
-eliminate border
+/* eliminate border */
 body {
     margin: 0;
     padding: 0;
-}
-*/
-/* General Styles */
-body {
-    font-family: 'Arial', sans-serif;
-    background: #f4f4f4;
-    margin: 0;
-    padding: 20px;
-    color: #333;
-}
-
-h1, h2 {
-    color: #333;
-    margin-bottom: 10px;
-}
-
-p {
-    line-height: 1.6;
-}
-
-/* Layout and Spacing */
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-/* Interactive Elements */
-a {
-    color: #0066cc;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-/* Responsiveness */
-@media (max-width: 600px) {
-    .container {
-        padding: 10px;
-    }
-
-    h1, h2 {
-        font-size: 1.5em;
-    }
 }
