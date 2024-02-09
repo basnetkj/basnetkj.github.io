@@ -54,6 +54,8 @@ html {
     align-items: center;
     margin-top: -111px;
     flex-direction: column; 
+    opacity:100%;
+    
     
 }
 
@@ -62,7 +64,7 @@ html {
 }
 
 .centered h1 {
-    color: grey;
+    color: white;
     font-weight: 700;
     font-size: 5em;
     text-transform: uppercase;
@@ -71,7 +73,7 @@ html {
 }
 
 .centered h2 {
-    color: grey;
+    color: white;
     font-size: 2.5rem;
 }
 
@@ -185,6 +187,22 @@ html {
         width: var(--fill-percentage);
     }
 }
+
+.experience-item h3 {
+    margin-top: 20px;
+}
+
+.experience-item p.text-muted {
+    font-size: 0.9em;
+    margin-bottom: 10px;
+}
+
+.experience-item ul {
+    list-style-type: disc;
+    margin-left: 20px;
+}
+
+
 
 footer {
     background-color: #f8f9fa;

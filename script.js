@@ -29,3 +29,18 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 });
 
+document.addEventListener("DOMContentLoaded", function() {
+    const profileImg = document.getElementById('kabir');
+    const aboutText = document.querySelector('#about div');
+
+    profileImg.style.opacity = 0;
+    aboutText.style.opacity = 0;
+
+    setTimeout(() => {
+        profileImg.style.opacity = 1;
+        profileImg.style.transition = 'opacity 2s';
+        aboutText.style.opacity = 1;
+        aboutText.style.transition = 'opacity 2s';
+    }, 500);
+});
+
