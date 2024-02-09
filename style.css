@@ -62,7 +62,7 @@ html {
 }
 
 .centered h1 {
-    color: white;
+    color: grey;
     font-weight: 700;
     font-size: 5em;
     text-transform: uppercase;
@@ -71,7 +71,7 @@ html {
 }
 
 .centered h2 {
-    color: white;
+    color: grey;
     font-size: 2.5rem;
 }
 
@@ -109,11 +109,13 @@ html {
     display: block; /* To ensure it takes the margins into account */
     margin-left: auto; /* These two margins will center the image horizontally */
     margin-right: auto;
+    
 }
 
 #about {
     background-color: white;
     padding: 50px 0;
+    
 }
 
 .skills {
