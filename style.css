@@ -203,6 +203,17 @@ html {
 }
 
 
+.designer-link {
+    color: inherit; /* Makes the link color the same as the surrounding text */
+    text-decoration: none; /* Removes the underline from the link */
+}
+
+.designer-link:hover {
+    color: #007bff; /* Change this to the color you want on hover */
+    text-decoration: underline; /* Optional: Adds underline on hover for clarity */
+}
+
+
 
 footer {
     background-color: #f8f9fa;
