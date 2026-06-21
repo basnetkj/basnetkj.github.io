@@ -1760,13 +1760,10 @@ const MarriageGame = (function() {
 
     const hand = document.createElement('div'); hand.className = 'mg-hand';
     for (const c of state.hands[0]) {
-      const isSel = state.selected.has(c);
-      const cd = CE.buildCard(c, {sm:true, sel: isSel});
+      const cd = CE.buildCard(c, {sm:true, sel: state.selected.has(c)});
       if (state.turn === 0) {
         cd.style.cursor = 'pointer';
-        (function(card) {
-          cd.addEventListener('click', function() { toggleSelect(card); });
-        })(c);
+        cd.addEventListener('click', () => toggleSelect(c));
       }
       hand.appendChild(cd);
     }
@@ -1945,6 +1942,8 @@ const Game2048 = (function() {
     return r;
   }
 
+  const T = b => b[0].map((_,c) => b.map(r => r[c]));
+
   function move(dir) {
     if (over) return;
     let b = board.map(function(r){return r.slice();});
@@ -1955,14 +1954,9 @@ const Game2048 = (function() {
     } else if (dir === 'right') {
       b = b.map(function(r){ return slideLeft(r.slice().reverse()).reverse(); });
     } else if (dir === 'up') {
-      // Transpose, slide left, transpose back
-      const T = b[0].map(function(_,c){ return b.map(function(r){return r[c];}); });
-      const sT = T.map(slideLeft);
-      b = sT[0].map(function(_,r){ return sT.map(function(c){return c[r];}); });
+      b = T(T(b).map(slideLeft));
     } else if (dir === 'down') {
-      const T = b[0].map(function(_,c){ return b.map(function(r){return r[c];}); });
-      const sT = T.map(function(r){ return slideLeft(r.slice().reverse()).reverse(); });
-      b = sT[0].map(function(_,r){ return sT.map(function(c){return c[r];}); });
+      b = T(T(b).map(r => slideLeft(r.slice().reverse()).reverse()));
     }
 
     for (let r = 0; r < 4; r++) for (let c = 0; c < 4; c++) if (board[r][c] !== b[r][c]) moved = true;
@@ -2026,60 +2020,41 @@ const Game2048 = (function() {
 })();
 
 // --- Game Orchestrator -------------------------------------------------------
+const $ = id => document.getElementById(id);
 let _currentGame = null;
 
-function openGame(id) {
-  const gov = document.getElementById('gov');
-  const stage = document.getElementById('gstage');
-  const title = document.getElementById('gov-title');
-  const scoreEl = document.getElementById('gov-score');
-  scoreEl.textContent = '';
-  _currentGame = id;
+const GAMES = {
+  callbreak: s => CallbreakGame.init(s, r => { $('gov-score').textContent = 'You: ' + r[0] + 'pt'; }),
+  marriage:  s => MarriageGame.init(s),
+  snake:     s => SnakeGame.init(s),
+  '2048':    s => { Game2048.init(s); Game2048.setupTouch(s); }
+};
+const GAME_NAMES = { callbreak:'🃏 Callbreak', marriage:'💍 Marriage', snake:'🐍 Snake', '2048':'🔢 2048' };
 
-  const names = { callbreak:'🃏 Callbreak', marriage:'💍 Marriage', snake:'🐍 Snake', '2048':'🔢 2048' };
-  title.textContent = names[id] || id;
-  gov.classList.add('open');
+function openGame(id) {
+  $('gov-title').textContent = GAME_NAMES[id] || id;
+  $('gov-score').textContent = '';
+  _currentGame = id;
+  $('gov').classList.add('open');
   document.body.style.overflow = 'hidden';
   _setupKeyListeners();
-
-  if (id === 'callbreak') {
-    CallbreakGame.init(stage, function(s) {
-      scoreEl.textContent = 'You: ' + s[0] + 'pt';
-    });
-  } else if (id === 'marriage') {
-    MarriageGame.init(stage);
-  } else if (id === 'snake') {
-    SnakeGame.init(stage);
-  } else if (id === '2048') {
-    Game2048.init(stage);
-    Game2048.setupTouch(stage);
-  }
+  GAMES[id]($('gstage'));
 }
 
 function closeGame() {
-  const gov = document.getElementById('gov');
-  gov.classList.remove('open');
+  $('gov').classList.remove('open');
   document.body.style.overflow = '';
   if (_currentGame === 'snake') SnakeGame.destroy();
   _removeKeyListeners();
   _currentGame = null;
-  document.getElementById('gstage').innerHTML = '';
-  document.getElementById('gov-score').textContent = '';
+  $('gstage').innerHTML = '';
+  $('gov-score').textContent = '';
 }
 
 function restartGame() {
-  const stage = document.getElementById('gstage');
-  if (_currentGame === 'callbreak') {
-    CallbreakGame.init(stage, function(s) {
-      document.getElementById('gov-score').textContent = 'You: ' + s[0] + 'pt';
-    });
-  } else if (_currentGame === 'marriage') {
-    MarriageGame.init(stage);
-  } else if (_currentGame === 'snake') {
-    SnakeGame.destroy(); SnakeGame.init(stage);
-  } else if (_currentGame === '2048') {
-    Game2048.reset();
-  }
+  if (_currentGame === 'snake') SnakeGame.destroy();
+  if (_currentGame === '2048') return Game2048.reset();
+  GAMES[_currentGame]($('gstage'));
 }
 
 function dpadPress(dir) {
@@ -2104,3 +2079,4 @@ function _removeKeyListeners() { document.removeEventListener('keydown', _handle
 </script>
 </body>
 </html>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
